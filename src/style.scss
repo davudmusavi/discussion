@@ -1,0 +1,235 @@
+$backGround: #eaeef2;
+$white: white;
+$font: Roboto-Medium;
+$flexRow: row;
+$borderColor: #e2e9ee;
+$secoundColor: #bdc3d3;
+$transition: ease-in-out .6s;
+$activeColor: #235ee7;
+
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url('./assets/fonts/Roboto-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Roboto-Medium';
+    src: url('./assets/fonts/Roboto-Medium.ttf') format('truetype');
+}
+
+@mixin center {
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin placeholder {
+    input::-webkit-input-placeholder {
+        color: $secoundColor;
+    }
+    ::-moz-placeholder {
+        color: $secoundColor;
+    }
+
+    :-ms-input-placeholder {
+        color: $secoundColor;
+    }
+
+    ::-webkit-input-placeholder {
+        color: $secoundColor;
+    }
+
+    ::placeholder {
+        color: $secoundColor;
+    }
+}
+
+@mixin profile {
+    width: 2.9rem;
+    height: 2.9rem;
+    margin-right: 20px;
+    border-radius: 3rem;
+}
+
+
+body {
+    background-color: $backGround;
+    display: flex;
+    font-family: $font;
+    @include center;
+    @include placeholder;
+}
+
+.container {
+    width: 40rem;
+    background-color: $white;
+    overflow: hidden;
+    border-radius: 0.5rem;
+}
+
+.commentWrap {
+    display: flex;
+    background-color: #fafbfc;
+    height: 6rem;
+    border-bottom: 0.13rem solid $borderColor;
+    @include center;
+    flex-direction: $flexRow;
+
+    &.activeReply {
+        background-color: #fff;
+        border-bottom: none;
+        margin-left: 50px;
+    }
+
+
+    .commentInput {
+        display: flex;
+        width: 100%;
+        height: 40px;
+        justify-content: space-between;
+        @include center;
+        
+        input {
+            outline: none;
+            width: 75%;
+            height: 40px;
+            background-color: $white;
+            border-radius: 5px;
+            font-family: $font;
+            border:0.15rem solid $borderColor;
+            color: #2b3a46;
+            font-weight: 500;
+            padding: 0 1rem;
+            font-size: 16px;
+            transition: $transition;
+
+            &:hover {
+                border-color: #ccc;
+                transition: $transition
+            }
+            &:focus {
+                border-color: #ccc;
+            }
+        }
+
+        img{
+            @include profile
+        }
+    }
+}
+
+.commentItemsWrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+   
+    .commentItems {
+        padding: 1.5rem 1.9rem;
+        border-bottom: 0.13rem solid $borderColor;
+        display: flex;
+        flex-direction: $flexRow;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .commentItemsInner {
+            display: flex;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &.commentItems_replied {
+            flex-direction: column;
+            position: relative;
+
+            &::after {
+                content: "";
+                background-color: $borderColor;
+                position: absolute;
+                left: 50px;
+                height: 80%;
+                width: 1px;
+                bottom: 20px;
+            }
+        }
+        &.replied {
+            border-bottom: none;
+            padding: 1.5rem 0 0rem 2rem;
+            margin-left: 1.5rem;
+        }
+    }
+    
+    img {
+        @include profile
+    }
+
+    .nameImage {
+        @include profile;
+        width: 3.9rem;
+        background-color: #deedfc;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        color: #5389bc;
+    }
+
+    .userName {
+        span {
+            font-family: 'Roboto-Bold';
+            font-size: 1.2rem;
+        }
+        data {
+            color: #cbcfdc;
+            margin-left: 12px;
+            font-weight: 400;
+        }
+    }
+  
+    p {
+        font-size: 1rem;
+        color: #8f959b;
+        margin-top: 10px;
+    }
+
+    .likeReply {
+        display: flex;
+        flex-direction: $flexRow;
+        align-items: center;
+
+        .likeCounter {
+            padding:0.4rem  1rem;
+            border-radius: 1rem;
+            background-color: #f4f5fa;
+            display: flex;
+            flex-direction: row;
+
+            &.active {
+                background-color: $activeColor;
+                color: $white;
+            }
+        }
+
+        span {
+            margin-left: 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            color: $activeColor;
+        }
+    }
+
+}
+
+.likeIcon {
+    margin-right: 0.6rem;
+   
+    width: 1.1rem;
+    height: 1.1rem;
+    
+    &.likeIconUnActive {
+        background: url('./assets/thumbs-up.svg') no-repeat;
+        background-size: contain;
+    }
+    &.likeIconActive {
+        background: url('./assets/thumbs-up-acttive.svg') no-repeat;
+        background-size: contain;
+    }
+}
